@@ -1,0 +1,496 @@
+/* Styles pour le corps de la page */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4b0f24, #8b1e3f);
+    color: #ffffff; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden; 
+    justify-content: center;
+    height: 100vh; 
+}
+
+body::before {
+    content: none; 
+}
+
+/* Conteneur principal */
+.container {
+    width: 90%;
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    box-sizing: border-box; 
+    margin-top: 70px; 
+}
+
+/* Conteneur principal pour la page "Mes Favoris" */
+.favorites-container {
+    width: 90%;
+    max-width: 1200px; 
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+    padding: 20px; 
+    box-sizing: border-box; 
+}
+
+/* Titre principal (H1) */
+h1 {
+    font-family: 'Playfair Display', serif; 
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+}
+
+/* Barre de recherche */
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.search-form input[type="text"] {
+    width: 60%;
+    max-width: 500px;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px 0 0 8px; 
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.search-form input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.7); 
+}
+
+.search-form input[type="text"]:focus {
+    border-color: #4ca1af; 
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Bouton Rechercher */
+.search-form button {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #4ca1af, #2c3e50);
+    color: #ffffff;
+    border: none;
+    border-radius: 0 8px 8px 0; 
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.search-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Barre de navigation */
+.navbar {
+    position: fixed; /* Fixe la barre en haut de la page */
+    top: 0; /* Place la barre en haut */
+    left: 0;
+    width: 100%; /* Prend toute la largeur de la page */
+    background: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #4ca1af; 
+}
+
+/* Conteneur de connexion/inscription */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    margin: 50px auto;
+}
+
+/* Champs de formulaire */
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.login-container input:focus {
+    border-color: #4ca1af; 
+    outline: none;
+}
+
+/* Bouton */
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #4ca1af, #2c3e50); 
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-container button:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+}
+
+/* Lien d'inscription */
+.register-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ecf0f1;
+}
+
+.register-link a {
+    color: #4ca1af;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+    color: #2c3e50;
+}
+
+/* Styles pour la liste des résultats */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    display: flex;
+    align-items: center; /* Aligner les éléments verticalement */
+    justify-content: space-between; /* Espacer les éléments horizontalement */
+    margin-bottom: 20px; /* Espacement entre les résultats */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Ligne de séparation subtile */
+    padding-bottom: 10px;
+}
+
+/* Styles pour les images */
+ul li img {
+    width: 150px; /* Largeur fixe pour les images */
+    height: auto; /* Maintenir le ratio d'aspect */
+    object-fit: contain; /* Empêcher les images d'être coupées */
+    margin-right: 20px; /* Espacement entre l'image et le texte */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Bordure subtile */
+    border-radius: 8px; /* Coins arrondis */
+}
+
+/* Conteneur pour le texte et le bouton */
+ul li div {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permet au texte de prendre l'espace disponible */
+    margin-right: 20px; /* Espacement entre le texte et le bouton */
+}
+
+ul li strong {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+ul li span {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Bouton "Ajouter à ma bibliothèque" */
+ul li form button {
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #4ca1af, #2c3e50);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+ul li form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Section des livres */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Grille responsive */
+    gap: 20px; /* Espacement entre les livres */
+    margin-top: 40px; /* Ajoute un espacement en haut pour éviter que les livres soient coupés */
+    justify-content: center; /* Centre les livres dans la grille */
+    padding: 20px; /* Ajoute un peu d'espace autour des résultats */
+}
+
+/* Cartes des livres */
+.book-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.book-card img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+/* Boutons "Ajouter à ma bibliothèque" */
+.book-card button {
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #4ca1af, #2c3e50); /* Dégradé pour le bouton */
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.book-card button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Liste des favoris */
+.favorites-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Grille responsive */
+    gap: 20px; /* Espacement entre les favoris */
+    margin-top: 20px;
+}
+
+/* Cartes des favoris */
+.favorite-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.favorite-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.favorite-card img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+/* Bouton Supprimer */
+.btn-delete {
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #e74c3c, #c0392b); /* Dégradé rouge pour le bouton */
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-delete:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Message de confirmation ou d'erreur */
+.message {
+    text-align: center;
+    color: #4ca1af;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.error {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+/* Section des résultats */
+.results-header {
+    margin-top: 100px; /* Ajoute un espacement sous la navbar */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.results-header h2 {
+    font-size: 24px;
+    color: #ffffff;
+}
+
+/* Bouton Retour */
+.results-footer {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-back {
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #4ca1af, #2c3e50); /* Dégradé pour le bouton */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Formulaire de profil */
+.profile-form {
+    max-width: 500px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.profile-form label {
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.profile-form input {
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.profile-form input:focus {
+    border-color: #4ca1af;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.profile-form button {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #4ca1af, #2c3e50);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.profile-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Messages */
+.message {
+    text-align: center;
+    color: #4ca1af;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.error {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        justify-content: flex-start; /* Aligne le contenu en haut sur petits écrans */
+        padding: 20px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste la grille pour petits écrans */
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
