@@ -17,12 +17,17 @@ require 'database.php';
 $database = new Database();
 $conn = $database->getConnection();
 
+// 🔑 Inclusion de la clé API depuis un fichier de configuration sécurisé
+require 'config.php';
+
 $results = [];
 $error = null;
+$search_performed = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchQuery'])) {
+    $search_performed = true;
     $searchQuery = urlencode($_POST['searchQuery']);
-    $apiUrl = "https://www.googleapis.com/books/v1/volumes?q={$searchQuery}&langRestrict=fr&key={$apiKey}";
+    $apiUrl = "https://www.googleapis.com/books/v1/volumes?q={$searchQuery}&maxResults=20&langRestrict=fr&key={$apiKey}";
 
     // Effectuer la requête à l'API Google Books
     $response = @file_get_contents($apiUrl);
@@ -49,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchQuery'])) {
      
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="<?php if ($search_performed) echo 'search-active'; ?>">
     <div class="container">
        <!-- navbar -->
         <div class="navbar">
@@ -106,9 +111,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchQuery'])) {
     </div>
 </body>
 </html>
-
-
-
-
-
-

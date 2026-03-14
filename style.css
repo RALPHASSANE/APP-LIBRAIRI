@@ -12,7 +12,6 @@ body {
     position: relative;
     overflow-x: hidden; 
     justify-content: center;
-    height: 100vh; 
 }
 
 body::before {
@@ -472,6 +471,11 @@ ul li form button:hover {
     color: #e74c3c;
     font-size: 16px;
     margin-top: 20px;
+}
+
+/* Ajustement pour le body quand une recherche est effectuée */
+body.search-active {
+    justify-content: flex-start;
 }
 
 /* Responsive Design */

@@ -1,0 +1,5 @@
+# Fichier de configuration contenant les clés secrètes
+config.php
+
+# Fichiers système macOS
+.DS_Store
