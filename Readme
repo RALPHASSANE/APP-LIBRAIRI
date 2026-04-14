@@ -1,0 +1,129 @@
+# LIBRAIRIE - Application Web de Gestion de Livres
+
+## Table des matières
+1.  [Introduction](#1-introduction)
+2.  [Fonctionnalités](#2-fonctionnalités)
+3.  [Structure du Projet](#3-structure-du-projet)
+4.  [Prérequis](#4-prérequis)
+5.  [Déploiement Local](#5-déploiement-local)
+    *   [1. Cloner le dépôt](#1-cloner-le-dépôt)
+    *   [2. Configuration de la base de données](#2-configuration-de-la-base-de-données)
+    *   [3. Configuration de l'application](#3-configuration-de-lapplication)
+    *   [4. Accès à l'application](#4-accès-à-lapplication)
+6.  [Technologies Utilisées](#6-technologies-utilisées)
+7.  [Améliorations Possibles](#7-améliorations-possibles)
+
+## 1. Introduction
+Ce projet est une application web simple de gestion de livres, permettant aux utilisateurs de s'inscrire, de se connecter, et de gérer une liste de leurs livres favoris. L'application est développée en PHP avec une base de données MySQL et utilise PDO pour les interactions avec la base de données. L'interface utilisateur est stylisée avec CSS pour une expérience moderne et réactive.
+
+## 2. Fonctionnalités
+*   **Inscription des utilisateurs** : Les nouveaux utilisateurs peuvent créer un compte avec un nom d'utilisateur, une adresse e-mail et un mot de passe sécurisé (haché avec `password_hash`).
+*   **Connexion des utilisateurs** : Les utilisateurs enregistrés peuvent se connecter à leur compte en utilisant leur e-mail et leur mot de passe.
+*   **Gestion des favoris** : Les utilisateurs connectés peuvent consulter leur liste de livres favoris et supprimer des livres de cette liste.
+*   **Navigation** : Une barre de navigation permet d'accéder aux différentes sections de l'application (Accueil, Mes Favoris, Profil, Déconnexion).
+*   **Interface Utilisateur** : Une interface utilisateur simple et réactive, stylisée avec CSS, offrant une expérience agréable.
+
+## 3. Structure du Projet
+Le projet est organisé comme suit :
+*   `e:\APP-LIBRAIRI\database.php` : Gère la connexion à la base de données MySQL en utilisant PDO. Il configure la connexion (hôte, nom de la base, identifiants) et assure la gestion des erreurs.
+*   `e:\APP-LIBRAIRI\user.php` : Contient la classe `User` qui gère la logique d'authentification des utilisateurs, notamment la vérification des identifiants de connexion.
+*   `e:\APP-LIBRAIRI\inscription.php` : Gère le processus d'inscription des nouveaux utilisateurs. Il inclut la validation des données du formulaire, la vérification de l'unicité de l'e-mail/nom d'utilisateur, le hachage du mot de passe et l'insertion en base de données. Il affiche également le formulaire d'inscription.
+*   `e:\APP-LIBRAIRI\mes_favoris.php` : Affiche la liste des livres favoris de l'utilisateur connecté et permet de les supprimer. Il gère également les messages de succès ou d'erreur liés à ces actions.
+*   `e:\APP-LIBRAIRI\style.css` : Fichier de style CSS pour l'ensemble de l'application. Il utilise des variables CSS pour une meilleure maintenabilité et inclut des styles pour les formulaires, les boutons, la navigation, les cartes de livres et la réactivité.
+*   `index.php`, `accueil.php`, `profil.php`, `logout.php` : (Non fournis dans l'extrait, mais implicitement présents et référencés par la navigation) Ces fichiers géreraient respectivement la page d'accueil/connexion, la page principale de l'application, la page de profil utilisateur et la déconnexion.
+
+## 4. Prérequis
+Pour déployer et exécuter cette application localement, vous aurez besoin des éléments suivants :
+*   **Serveur Web** : Apache ou Nginx.
+*   **PHP** : Version 7.4 ou supérieure recommandée.
+*   **MySQL/MariaDB** : Base de données relationnelle.
+*   Un éditeur de texte ou IDE (VS Code, PhpStorm, etc.).
+
+Pour une installation facile sur Windows, macOS ou Linux, l'utilisation d'un environnement de développement local comme **XAMPP**, **WAMP** ou **MAMP** est fortement recommandée car ils regroupent Apache, PHP et MySQL.
+
+## 5. Déploiement Local
+
+Suivez ces étapes pour configurer et exécuter l'application sur votre machine locale.
+
+### 1. Cloner le dépôt
+Si le projet est sur un dépôt Git, clonez-le dans le répertoire de votre serveur web (par exemple, `htdocs` pour XAMPP) :
+```bash
+git clone <URL_DU_DEPOT> E:/APP-LIBRAIRI
+```
+Si vous avez téléchargé les fichiers manuellement, placez le dossier `APP-LIBRAIRI` directement dans le répertoire `htdocs` de votre installation XAMPP/WAMP/MAMP. Par exemple, si vous utilisez XAMPP, le chemin serait `C:\xampp\htdocs\APP-LIBRAIRI`.
+
+### 2. Configuration de la base de données
+
+1.  **Démarrer le serveur de base de données** : Assurez-vous que votre serveur MySQL/MariaDB est en cours d'exécution (via le panneau de contrôle XAMPP/WAMP/MAMP).
+2.  **Accéder à phpMyAdmin** : Ouvrez votre navigateur et allez à `http://localhost/phpmyadmin`.
+3.  **Créer la base de données** :
+    *   Cliquez sur l'onglet "Bases de données".
+    *   Dans le champ "Créer une base de données", entrez `library_db` et cliquez sur "Créer".
+4.  **Créer les tables** :
+    Exécutez les requêtes SQL suivantes dans l'onglet "SQL" de votre base de données `library_db` pour créer les tables nécessaires :
+
+    ```sql
+    -- Table pour les utilisateurs
+    CREATE TABLE users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) NOT NULL UNIQUE,
+        email VARCHAR(100) NOT NULL UNIQUE,
+        password VARCHAR(255) NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+
+    -- Table pour les favoris des utilisateurs
+    CREATE TABLE favoris (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        authors VARCHAR(255),
+        image_url VARCHAR(255),
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    ```
+    **Note sur les noms de table** : Le fichier `e:\APP-LIBRAIRI\user.php` utilise la table `utilisateurs` pour la connexion, tandis que `e:\APP-LIBRAIRI\inscription.php` utilise la table `users` pour l'inscription. Pour la cohérence, les scripts SQL ci-dessus créent la table `users`. Si vous rencontrez des erreurs de connexion après l'inscription, il pourrait être nécessaire de modifier le nom de la table dans `user.php` de `utilisateurs` à `users` pour qu'il corresponde.
+
+### 3. Configuration de l'application
+
+1.  **Vérifier `e:\APP-LIBRAIRI\database.php`** :
+    Ouvrez le fichier `e:\APP-LIBRAIRI\database.php`. Les paramètres par défaut sont généralement adaptés pour XAMPP/WAMP/MAMP :
+    ```php
+    private $host = "127.0.0.1";
+    private $db_name = "library_db";
+    private $username = "root";
+    private $password = "";
+    private $port = "3306";
+    ```
+    Si votre configuration de base de données est différente (par exemple, un mot de passe pour l'utilisateur `root`, un port différent), modifiez ces valeurs en conséquence.
+
+2.  **Démarrer le serveur Apache** : Assurez-vous que votre serveur Apache est en cours d'exécution (via le panneau de contrôle XAMPP/WAMP/MAMP).
+
+### 4. Accès à l'application
+
+Ouvrez votre navigateur web et accédez à l'URL suivante :
+```
+http://localhost/APP-LIBRAIRI/inscription.php
+```
+Vous devriez voir la page d'inscription. Une fois inscrit, vous pourrez vous connecter (via `index.php` ou `accueil.php` si ces fichiers existent) et accéder à vos favoris.
+
+## 6. Technologies Utilisées
+*   **Backend** : PHP
+*   **Base de données** : MySQL/MariaDB
+*   **Gestion de base de données** : PDO (PHP Data Objects)
+*   **Frontend** : HTML5, CSS3
+
+## 7. Améliorations Possibles
+*   **Gestion des erreurs plus robuste** : Afficher des messages d'erreur plus conviviaux à l'utilisateur sans exposer les détails techniques de la base de données.
+*   **Sécurité** : Implémenter des mesures de sécurité supplémentaires comme la protection CSRF (Cross-Site Request Forgery) pour les formulaires.
+*   **Fonctionnalité de recherche** : Développer la fonctionnalité de recherche de livres (qui est implicite par le CSS et la structure de l'application).
+*   **Pagination** : Pour les listes de livres ou de favoris, afin d'améliorer les performances et l'expérience utilisateur avec un grand nombre d'éléments.
+*   **Gestion des sessions** : Utiliser des sessions plus sécurisées (par exemple, avec des cookies HttpOnly et Secure).
+*   **Architecture MVC** : Refactoriser le code vers une architecture Model-View-Controller pour une meilleure organisation, une séparation des préoccupations et une maintenabilité accrue.
+*   **Validation côté client** : Ajouter une validation JavaScript pour les formulaires afin d'améliorer l'expérience utilisateur et réduire les requêtes serveur inutiles.
+*   **Intégration d'API externe** : Intégrer une API externe (comme Google Books API) pour récupérer des informations sur les livres, leurs couvertures, etc.
+*   **Gestion des utilisateurs** : Ajouter des fonctionnalités pour la modification du profil, la réinitialisation de mot de passe, etc.
+```
+
