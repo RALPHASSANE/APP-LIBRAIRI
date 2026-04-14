@@ -115,15 +115,5 @@ Vous devriez voir la page d'inscription. Une fois inscrit, vous pourrez vous con
 *   **Gestion de base de données** : PDO (PHP Data Objects)
 *   **Frontend** : HTML5, CSS3
 
-## 7. Améliorations Possibles
-*   **Gestion des erreurs plus robuste** : Afficher des messages d'erreur plus conviviaux à l'utilisateur sans exposer les détails techniques de la base de données.
-*   **Sécurité** : Implémenter des mesures de sécurité supplémentaires comme la protection CSRF (Cross-Site Request Forgery) pour les formulaires.
-*   **Fonctionnalité de recherche** : Développer la fonctionnalité de recherche de livres (qui est implicite par le CSS et la structure de l'application).
-*   **Pagination** : Pour les listes de livres ou de favoris, afin d'améliorer les performances et l'expérience utilisateur avec un grand nombre d'éléments.
-*   **Gestion des sessions** : Utiliser des sessions plus sécurisées (par exemple, avec des cookies HttpOnly et Secure).
-*   **Architecture MVC** : Refactoriser le code vers une architecture Model-View-Controller pour une meilleure organisation, une séparation des préoccupations et une maintenabilité accrue.
-*   **Validation côté client** : Ajouter une validation JavaScript pour les formulaires afin d'améliorer l'expérience utilisateur et réduire les requêtes serveur inutiles.
-*   **Intégration d'API externe** : Intégrer une API externe (comme Google Books API) pour récupérer des informations sur les livres, leurs couvertures, etc.
-*   **Gestion des utilisateurs** : Ajouter des fonctionnalités pour la modification du profil, la réinitialisation de mot de passe, etc.
-```
+
 
