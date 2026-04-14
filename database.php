@@ -2,9 +2,9 @@
 class Database {
     private $host = "127.0.0.1";  
     private $db_name = "library_db"; // ⚠️ Vérifie bien que ta base s'appelle comme ça dans phpMyAdmin
-    private $username = "root";  
-    private $password = "root";  
-    private $port = "8889"; // 🚀 AJOUT : Le port par défaut de MAMP
+    private $username = "root";  // Pour XAMPP, c'est souvent "root"
+    private $password = "";  // Pour XAMPP, c'est souvent "" (vide)
+    private $port = "3306"; // Pour XAMPP, c'est souvent "3306"
     public $conn;
 
     public function getConnection() {

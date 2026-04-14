@@ -1,10 +1,42 @@
+/* Variables CSS pour une meilleure maintenabilité */
+:root {
+    /* Couleurs */
+    --color-primary-dark: #4b0f24; /* Bordeaux foncé */
+    --color-primary-light: #8b1e3f; /* Rouge-violet */
+    --color-accent-blue-start: #4ca1af; /* Bleu-vert clair */
+    --color-accent-blue-end: #2c3e50; /* Gris-bleu foncé */
+    --color-danger-start: #e74c3c; /* Rouge vif */
+    --color-danger-end: #c0392b; /* Rouge foncé */
+    --color-text-light: #ffffff;
+    --color-text-muted: rgba(255, 255, 255, 0.7);
+    --color-text-link-hover: #4ca1af; /* Couleur de survol pour les liens */
+
+    /* Transparence */
+    --bg-transparent-light: rgba(255, 255, 255, 0.1);
+    --bg-transparent-medium: rgba(255, 255, 255, 0.15);
+    --bg-transparent-dark: rgba(255, 255, 255, 0.2);
+
+    /* Ombres */
+    --shadow-light: rgba(0, 0, 0, 0.3);
+    --shadow-medium: rgba(0, 0, 0, 0.4);
+    --shadow-strong: rgba(0, 0, 0, 0.5);
+
+    /* Rayons de bordure */
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+
+    /* Typographie */
+    --font-primary: 'Arial', sans-serif;
+    --font-heading: 'Playfair Display', serif;
+}
+
 /* Styles pour le corps de la page */
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #4b0f24, #8b1e3f);
-    color: #ffffff; 
+    font-family: var(--font-primary);
+    background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary-light));
+    color: var(--color-text-light); 
     display: flex;
     flex-direction: column; 
     align-items: center;
@@ -18,34 +50,37 @@ body::before {
     content: none; 
 }
 
-/* Conteneur principal */
-.container {
+/* Base pour les conteneurs principaux */
+.base-container {
     width: 90%;
     max-width: 1200px; 
     margin: 0 auto; 
     padding: 20px; 
     box-sizing: border-box; 
-    margin-top: 70px; 
+}
+
+/* Conteneur principal */
+.container {
+    /* Hérite de .base-container */
+    margin-top: 70px; /* Pour compenser la navbar fixe */
 }
 
 /* Conteneur principal pour la page "Mes Favoris" */
 .favorites-container {
-    width: 90%;
-    max-width: 1200px; 
-    margin: 20px auto;
+    /* Hérite de .base-container */
+    margin: 20px auto; /* Ajustement pour la page favoris */
     display: flex;
     flex-direction: column;
     gap: 20px; 
-    padding: 20px; 
-    box-sizing: border-box; 
+    /* padding et box-sizing hérités */
 }
 
 /* Titre principal (H1) */
-h1 {
-    font-family: 'Playfair Display', serif; 
+h1 { /* Appliqué à tous les h1 */
+    font-family: var(--font-heading); 
     font-size: 36px;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--color-text-light);
     text-align: center;
     margin-top: 20px; 
     margin-bottom: 20px; 
@@ -62,42 +97,48 @@ h1 {
 .search-form input[type="text"] {
     width: 60%;
     max-width: 500px;
-    padding: 12px 15px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 8px 0 0 8px; 
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    padding: 0.75rem 1rem; /* Utilisation de rem */
+    border: 1px solid var(--bg-transparent-light);
+    border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm); 
+    background-color: var(--bg-transparent-dark);
+    color: var(--color-text-light);
     font-size: 16px;
-    outline: none;
+    outline: none; /* Supprimé pour l'accessibilité, mais compensé par le focus */
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .search-form input[type="text"]::placeholder {
-    color: rgba(255, 255, 255, 0.7); 
+    color: var(--color-text-muted); 
 }
 
 .search-form input[type="text"]:focus {
-    border-color: #4ca1af; 
-    background-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--color-accent-blue-start); 
+    background-color: var(--bg-transparent-medium);
+    box-shadow: 0 0 0 2px var(--color-accent-blue-start); /* Ajout d'un focus visible */
 }
 
 /* Bouton Rechercher */
 .search-form button {
-    padding: 12px 20px;
-    background: linear-gradient(135deg, #4ca1af, #2c3e50);
-    color: #ffffff;
+    padding: 0.75rem 1.25rem; /* Utilisation de rem */
+    background: linear-gradient(135deg, var(--color-accent-blue-start), var(--color-accent-blue-end));
+    color: var(--color-text-light);
     border: none;
-    border-radius: 0 8px 8px 0; 
+    border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; 
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px var(--shadow-light);
 }
 
 .search-form button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 12px var(--shadow-medium);
+}
+
+.search-form button:focus {
+    outline: 2px solid var(--color-accent-blue-start); /* Focus visible pour l'accessibilité */
+    outline-offset: 2px;
 }
 
 /* Barre de navigation */
@@ -105,27 +146,33 @@ h1 {
     position: fixed; /* Fixe la barre en haut de la page */
     top: 0; /* Place la barre en haut */
     left: 0;
-    width: 100%; /* Prend toute la largeur de la page */
-    background: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+    width: 100%;
+    background: var(--bg-transparent-light);
     padding: 10px 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Centrer les éléments de la navbar pour assurer la visibilité */
     align-items: center;
     z-index: 1000; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 4px 10px var(--shadow-light); 
+    gap: 20px; /* Espacement entre les liens de la navbar */
 }
 
 .navbar a {
-    color: #ffffff;
+    color: var(--color-text-light);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 1rem; /* Utilisation de rem */
     font-weight: 600;
-    margin: 0 10px;
+    margin: 0; /* Supprimer les marges, 'gap' gère l'espacement */
     transition: color 0.3s ease;
 }
 
 .navbar a:hover {
-    color: #4ca1af; 
+    color: var(--color-accent-blue-start); 
+}
+
+.navbar a:focus {
+    outline: 2px solid var(--color-accent-blue-start); /* Focus visible pour l'accessibilité */
+    outline-offset: 2px;
 }
 
 /* Conteneur de connexion/inscription */
@@ -160,40 +207,91 @@ h1 {
 }
 
 /* Bouton */
-.login-container button {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #4ca1af, #2c3e50); 
-    color: #ffffff;
+.btn-base {
+    padding: 0.75rem 1.25rem; /* Utilisation de rem */
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem; /* Utilisation de rem */
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
 }
 
-.login-container button:hover {
+.btn-base:hover {
     transform: translateY(-2px); 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 6px 12px var(--shadow-medium); 
+}
+
+.btn-base:focus {
+    outline: 2px solid var(--color-accent-blue-start); /* Focus visible */
+    outline-offset: 2px;
+}
+
+/* Bouton principal (bleu-vert) */
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-accent-blue-start), var(--color-accent-blue-end));
+    color: var(--color-text-light);
+}
+
+/* Bouton de suppression (rouge) */
+.btn-danger {
+    background: linear-gradient(135deg, var(--color-danger-start), var(--color-danger-end));
+    color: var(--color-text-light);
+}
+
+/* Appliquer les styles de bouton aux éléments spécifiques */
+.login-container button,
+.signup-container button,
+.profile-form button {
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    background: linear-gradient(135deg, var(--color-accent-blue-start), var(--color-accent-blue-end));
+    color: var(--color-text-light);
+}
+
+.login-container button:hover,
+.signup-container button:hover,
+.profile-form button:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 12px var(--shadow-medium); 
+}
+
+.login-container button:focus,
+.signup-container button:focus,
+.profile-form button:focus {
+    outline: 2px solid var(--color-accent-blue-start);
+    outline-offset: 2px;
 }
 
 /* Lien d'inscription */
 .register-link {
     margin-top: 15px;
-    font-size: 14px;
-    color: #ecf0f1;
+    font-size: 0.875rem; /* Utilisation de rem */
+    color: var(--color-text-muted); /* Utilisation d'une couleur plus cohérente */
 }
 
 .register-link a {
-    color: #4ca1af;
+    color: var(--color-accent-blue-start);
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
 }
 
 .register-link a:hover {
-    color: #2c3e50;
+    color: var(--color-accent-blue-end);
+}
+
+.register-link a:focus {
+    outline: 2px solid var(--color-accent-blue-start);
+    outline-offset: 2px;
 }
 
 /* Styles pour la liste des résultats */
@@ -207,8 +305,8 @@ ul li {
     display: flex;
     align-items: center; /* Aligner les éléments verticalement */
     justify-content: space-between; /* Espacer les éléments horizontalement */
-    margin-bottom: 20px; /* Espacement entre les résultats */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Ligne de séparation subtile */
+    margin-bottom: 1.25rem; /* Utilisation de rem */
+    border-bottom: 1px solid var(--bg-transparent-dark); /* Ligne de séparation subtile */
     padding-bottom: 10px;
 }
 
@@ -218,8 +316,8 @@ ul li img {
     height: auto; /* Maintenir le ratio d'aspect */
     object-fit: contain; /* Empêcher les images d'être coupées */
     margin-right: 20px; /* Espacement entre l'image et le texte */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Bordure subtile */
-    border-radius: 8px; /* Coins arrondis */
+    border: 1px solid var(--bg-transparent-light); /* Bordure subtile */
+    border-radius: var(--border-radius-sm); /* Coins arrondis */
 }
 
 /* Conteneur pour le texte et le bouton */
@@ -231,26 +329,28 @@ ul li div {
 }
 
 ul li strong {
-    font-size: 18px;
-    color: #ffffff;
+    font-size: 1.125rem; /* Utilisation de rem */
+    color: var(--color-text-light);
     margin-bottom: 5px;
 }
 
 ul li span {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem; /* Utilisation de rem */
+    color: var(--color-text-muted);
 }
 
 /* Bouton "Ajouter à ma bibliothèque" */
 ul li form button {
-    padding: 10px 15px;
-    background: linear-gradient(135deg, #4ca1af, #2c3e50);
-    color: #fff;
+    padding: 0.75rem 1.25rem;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.875rem; /* Taille plus petite pour ce bouton */
+    font-weight: 600;
     cursor: pointer;
-    font-size: 14px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    background: linear-gradient(135deg, var(--color-accent-blue-start), var(--color-accent-blue-end));
+    color: var(--color-text-light);
 }
 
 ul li form button:hover {
@@ -258,56 +358,68 @@ ul li form button:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+ul li form button:focus {
+    outline: 2px solid var(--color-accent-blue-start);
+    outline-offset: 2px;
+}
+
 /* Section des livres */
 .books-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Grille responsive */
     gap: 20px; /* Espacement entre les livres */
-    margin-top: 40px; /* Ajoute un espacement en haut pour éviter que les livres soient coupés */
+    margin-top: 2.5rem; /* Utilisation de rem, ajusté */
     justify-content: center; /* Centre les livres dans la grille */
     padding: 20px; /* Ajoute un peu d'espace autour des résultats */
 }
 
 /* Cartes des livres */
 .book-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    background: var(--bg-transparent-light);
+    border-radius: var(--border-radius-md);
     padding: 15px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px var(--shadow-light);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(5px); /* Ajout d'un léger flou pour les cartes */
 }
 
 .book-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 15px var(--shadow-medium);
 }
 
 .book-card img {
     width: 100%;
     max-width: 150px;
     height: auto;
-    margin-bottom: 15px;
-    border-radius: 8px;
+    margin-bottom: 1rem; /* Utilisation de rem */
+    border-radius: var(--border-radius-sm);
+    object-fit: contain; /* Assure que l'image entière est visible */
 }
 
 /* Boutons "Ajouter à ma bibliothèque" */
 .book-card button {
-    padding: 10px 15px;
-    background: linear-gradient(135deg, #4ca1af, #2c3e50); /* Dégradé pour le bouton */
-    color: #ffffff;
+    padding: 0.75rem 1.25rem;
     border: none;
-    border-radius: 8px;
-    font-size: 14px;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.875rem; /* Utilisation de rem */
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    background: linear-gradient(135deg, var(--color-accent-blue-start), var(--color-accent-blue-end));
+    color: var(--color-text-light);
 }
 
 .book-card button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 12px var(--shadow-medium);
+}
+
+.book-card button:focus {
+    outline: 2px solid var(--color-accent-blue-start);
+    outline-offset: 2px;
 }
 
 /* Liste des favoris */
@@ -482,19 +594,23 @@ body.search-active {
 @media (max-width: 768px) {
     body {
         justify-content: flex-start; /* Aligne le contenu en haut sur petits écrans */
-        padding: 20px;
+        padding-top: 20px; /* Ajoute un padding en haut pour le contenu */
     }
 
     .navbar {
         flex-direction: column;
-        gap: 10px;
+        gap: 10px; /* Espacement vertical entre les liens */
+        padding: 10px; /* Ajuste le padding de la navbar */
+        justify-content: center; /* Centrer les éléments même en colonne */
     }
-
+    .navbar a {
+        margin: 0; /* Supprimer les marges, 'gap' gère l'espacement */
+    }
     .books-grid {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste la grille pour petits écrans */
     }
 
     h1 {
-        font-size: 24px;
+        font-size: 1.5rem; /* Utilisation de rem */
     }
 }
