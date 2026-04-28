@@ -4,13 +4,7 @@ Application web de gestion de livres développée en PHP avec MySQL. Permet aux 
 
 ---
 
-## 📸 Aperçu
 
-<!-- Une fois vos screenshots ajoutés dans le dossier docs/screenshots/, décommentez ces lignes -->
-
-| Accueil | Connexion | Recherche |
-|---------|-----------|-----------|
-| ![Accueil](IMG/accueil.png) | ![Connexion](IMG/login.png) | ![Recherche](IMG/recherche-de-livres.png) |
 
 ---
 
