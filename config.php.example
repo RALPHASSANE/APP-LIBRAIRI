@@ -1,0 +1,4 @@
+<?php
+
+$apiKey = "VOTRE_CLE_API_GOOGLE_BOOKS_ICI";
+?>
